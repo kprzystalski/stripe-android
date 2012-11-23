@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/MainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF" >
+
+    <EditText
+        android:id="@+id/treatCarTextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="51dp"
+        android:ems="10"
+        android:hint="Amount to pay in cents"
+        android:inputType="number"
+        android:singleLine="true" >
+
+        <requestFocus />
+
+    </EditText>
+
+    <Button
+        android:id="@+id/orderButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:text="Button" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/orderButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:text="$0.00" />
+
+    <com.stripe.android.utils.CardNumberEditText
+        android:id="@+id/numberTextField"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/textView1"
+        android:layout_alignLeft="@+id/treatCarTextField"
+        android:layout_marginBottom="40dp"
+        android:textSize="12sp"
+        android:inputType="number"
+        android:ems="5" 
+        android:hint="Credit card number" >
+    </com.stripe.android.utils.CardNumberEditText>
+
+    <com.stripe.android.utils.MonthEditText
+        android:id="@+id/expMonthTextField"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/textView1"
+        android:layout_alignLeft="@+id/numberTextField"
+        android:ems="5"
+        android:inputType="number"
+        android:textSize="12sp"
+        android:hint="MM" />
+
+    <com.stripe.android.utils.YearEditText
+        android:id="@+id/expYearTextField"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_alignBaseline="@+id/expMonthTextField"
+        android:layout_alignBottom="@+id/expMonthTextField"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/expMonthTextField"
+        android:ems="5"
+        android:inputType="number"
+        android:textSize="12sp" 
+        android:hint="YYYY"/>
+
+    <com.stripe.android.utils.CVCNumberEditText
+        android:id="@+id/cvcTextField"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/textView1"
+        android:layout_alignRight="@+id/numberTextField"
+        android:ems="5"
+        android:inputType="number"
+        android:textSize="12sp" 
+        android:hint="CVC"/>
+
+</RelativeLayout>
+
