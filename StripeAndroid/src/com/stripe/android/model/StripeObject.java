@@ -12,7 +12,6 @@ public abstract class StripeObject {
 		setPrettyPrinting().
 		serializeNulls().
 		setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).
-		registerTypeAdapter(EventData.class, new EventDataDeserializer()).
 		create();
 	
 	@Override public String toString() {

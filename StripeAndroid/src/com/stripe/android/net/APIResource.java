@@ -23,15 +23,12 @@ import com.stripe.android.exception.AuthenticationException;
 import com.stripe.android.exception.CardException;
 import com.stripe.android.exception.InvalidRequestException;
 import com.stripe.android.exception.StripeException;
-import com.stripe.android.model.EventData;
-import com.stripe.android.model.EventDataDeserializer;
 import com.stripe.android.model.StripeObject;
 
 public abstract class APIResource extends StripeObject {
 
 	public static final Gson gson = new GsonBuilder().
 			setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).
-			registerTypeAdapter(EventData.class, new EventDataDeserializer()).
 			create();
 
 	private static String className(Class<?> clazz) { return clazz.getSimpleName().toLowerCase().replace("$",""); }

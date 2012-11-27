@@ -1,6 +1,5 @@
 package com.stripe.android.model;
 
-import java.util.List;
 import java.util.Map;
 
 import com.stripe.android.exception.StripeException;
@@ -21,9 +20,8 @@ public class Charge extends APIResource {
 	Integer amountRefunded;
 	String customer;
 	String invoice;
-	List<Fee> feeDetails;
 	Card card;
-	Dispute dispute;
+
 
 	public String getId() {
 		return id;
@@ -136,14 +134,6 @@ public class Charge extends APIResource {
 	public void setInvoice(String invoice) {
 		this.invoice = invoice;
 	}
-
-	public List<Fee> getFeeDetails() {
-		return feeDetails;
-	}
-
-	public void setFeeDetails(List<Fee> feeDetails) {
-		this.feeDetails = feeDetails;
-	}
 	
 	public Card getCard() {
 		return card;
@@ -153,24 +143,12 @@ public class Charge extends APIResource {
 		this.card = card;
 	}
 
-	public Dispute getDispute() {
-		return dispute;
-	}
-
-	public void setDispute(Dispute dispute) {
-		this.dispute = dispute;
-	}
-
 	public static Charge create(Map<String, Object> params) throws StripeException {
 		return create(params, null);
 	}
 
 	public static Charge retrieve(String id) throws StripeException {
 		return retrieve(id, null);
-	}
-
-	public static ChargeCollection all(Map<String, Object> params) throws StripeException {
-		return all(params, null);
 	}
 
 	public Charge refund() throws StripeException {
@@ -189,10 +167,6 @@ public class Charge extends APIResource {
 		return request(RequestMethod.GET, instanceURL(Charge.class, id), null, Charge.class, apiKey);
 	}
 
-	public static ChargeCollection all(Map<String, Object> params, String apiKey) throws StripeException {
-		return request(RequestMethod.GET, classURL(Charge.class), params, ChargeCollection.class, apiKey);
-	}
-
 	public Charge refund(String apiKey) throws StripeException {
         return this.refund((Map<String,Object>)null, apiKey); // full refund
     }
@@ -201,11 +175,5 @@ public class Charge extends APIResource {
 		return request(RequestMethod.POST,
 				String.format("%s/refund", instanceURL(Charge.class, this.getId())),
 				params, Charge.class, apiKey);
-	}
-
-	public Dispute updateDispute(Map<String, Object> params, String apiKey) throws StripeException {
-		return request(RequestMethod.POST,
-				String.format("%s/dispute", instanceURL(Charge.class, this.id)),
-				params, Dispute.class, apiKey);
 	}
 }

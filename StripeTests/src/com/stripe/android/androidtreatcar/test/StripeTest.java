@@ -1,7 +1,6 @@
 package com.stripe.android.androidtreatcar.test;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -12,7 +11,6 @@ import com.stripe.android.Stripe;
 import com.stripe.android.exception.CardException;
 import com.stripe.android.exception.StripeException;
 import com.stripe.android.model.Charge;
-import com.stripe.android.model.Fee;
 import com.stripe.android.model.Token;
 
 public class StripeTest extends AndroidTestCase {
@@ -81,14 +79,6 @@ public class StripeTest extends AndroidTestCase {
 	public void testChargeCreate() throws StripeException {
 		Charge createdCharge = Charge.create(defaultChargeParams);
 		assertFalse(createdCharge.getRefunded());
-
-		assertEquals(1, createdCharge.getFeeDetails().size());
-
-		Fee fee = createdCharge.getFeeDetails().get(0);
-		assertEquals("stripe_fee", fee.getType());
-		assertEquals(createdCharge.getFee(), fee.getAmount());
-		assertEquals(createdCharge.getCurrency(), fee.getCurrency());
-		assertEquals(null, fee.getApplication());
 	}
 
 	public void testChargeRetrieve() throws StripeException {
@@ -114,12 +104,6 @@ public class StripeTest extends AndroidTestCase {
 		assertEquals(refundedCharge.getAmountRefunded(), REFUND_AMOUNT);
 	}
 
-	public void testChargeList() throws StripeException {
-		Map<String, Object> listParams = new HashMap<String, Object>();
-		listParams.put("count", 1);
-		List<Charge> charges = Charge.all(listParams).getData();
-		assertEquals(charges.size(), 1);
-	}
 
 	public void testInvalidCard() throws StripeException {
 		try {
@@ -207,13 +191,6 @@ public class StripeTest extends AndroidTestCase {
 				Stripe.apiKey);
 		assertFalse(refundedCharge.getRefunded());
 		assertEquals(refundedCharge.getAmountRefunded(), REFUND_AMOUNT);
-	}
-
-	public void testChargeListPerCallAPIKey() throws StripeException {
-		Map<String, Object> listParams = new HashMap<String, Object>();
-		listParams.put("count", 1);
-		List<Charge> charges = Charge.all(listParams, Stripe.apiKey).getData();
-		assertEquals(charges.size(), 1);
 	}
 
 	public void testInvalidCardPerCallAPIKey() throws StripeException {
