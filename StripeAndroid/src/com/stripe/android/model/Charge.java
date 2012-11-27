@@ -151,14 +151,6 @@ public class Charge extends APIResource {
 		return retrieve(id, null);
 	}
 
-	public Charge refund() throws StripeException {
-        return this.refund(null, null);
-    }
-
-	public Charge refund(Map<String, Object> params) throws StripeException {
-		return this.refund(params, null);
-	}
-
 	public static Charge create(Map<String, Object> params, String apiKey) throws StripeException {
 		return request(RequestMethod.POST, classURL(Charge.class), params, Charge.class, apiKey);
 	}
@@ -167,13 +159,7 @@ public class Charge extends APIResource {
 		return request(RequestMethod.GET, instanceURL(Charge.class, id), null, Charge.class, apiKey);
 	}
 
-	public Charge refund(String apiKey) throws StripeException {
-        return this.refund((Map<String,Object>)null, apiKey); // full refund
-    }
 
-	public Charge refund(Map<String, Object> params, String apiKey) throws StripeException {
-		return request(RequestMethod.POST,
-				String.format("%s/refund", instanceURL(Charge.class, this.getId())),
-				params, Charge.class, apiKey);
-	}
+
+
 }

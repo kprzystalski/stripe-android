@@ -88,22 +88,6 @@ public class StripeTest extends AndroidTestCase {
 		assertEquals(createdCharge.getId(), retrievedCharge.getId());
 	}
 
-	public void testChargeRefund() throws StripeException {
-		Charge createdCharge = Charge.create(defaultChargeParams);
-		Charge refundedCharge = createdCharge.refund();
-		assertTrue(refundedCharge.getRefunded());
-	}
-
-	public void testChargePartialRefund() throws StripeException {
-		Charge createdCharge = Charge.create(defaultChargeParams);
-		Map<String, Object> refundParams = new HashMap<String, Object>();
-		final Integer REFUND_AMOUNT = 50;
-		refundParams.put("amount", REFUND_AMOUNT);
-		Charge refundedCharge = createdCharge.refund(refundParams);
-		assertFalse(refundedCharge.getRefunded());
-		assertEquals(refundedCharge.getAmountRefunded(), REFUND_AMOUNT);
-	}
-
 
 	public void testInvalidCard() throws StripeException {
 		try {
@@ -173,24 +157,6 @@ public class StripeTest extends AndroidTestCase {
 				Stripe.apiKey);
 		assertEquals(createdCharge.getCreated(), retrievedCharge.getCreated());
 		assertEquals(createdCharge.getId(), retrievedCharge.getId());
-	}
-
-	public void testChargeRefundPerCallAPIKey() throws StripeException {
-		Charge createdCharge = Charge
-				.create(defaultChargeParams, Stripe.apiKey);
-		Charge refundedCharge = createdCharge.refund(Stripe.apiKey);
-		assertTrue(refundedCharge.getRefunded());
-	}
-
-	public void testChargePartialRefundPerCallAPIKey() throws StripeException {
-		Charge createdCharge = Charge.create(defaultChargeParams);
-		Map<String, Object> refundParams = new HashMap<String, Object>();
-		final Integer REFUND_AMOUNT = 50;
-		refundParams.put("amount", REFUND_AMOUNT);
-		Charge refundedCharge = createdCharge.refund(refundParams,
-				Stripe.apiKey);
-		assertFalse(refundedCharge.getRefunded());
-		assertEquals(refundedCharge.getAmountRefunded(), REFUND_AMOUNT);
 	}
 
 	public void testInvalidCardPerCallAPIKey() throws StripeException {

@@ -41,8 +41,6 @@ public class TCMainActivity extends Activity {
 	private Map<String, Object> mChargeMap;
 	private Map<String, Object> mCardMap;
 	
-	private final float VALUE = 1f;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -135,7 +133,7 @@ public class TCMainActivity extends Activity {
 				
 				if(!validateFields()) return;
 				
-				mChargeMap.put("amount", (Long.valueOf(mTreatCarTextField.getText().toString()) * (long)VALUE));
+				mChargeMap.put("amount", (Long.valueOf(mTreatCarTextField.getText().toString())));
 				mChargeMap.put("currency", "usd");
 				mCardMap.put("number", mNumberTextField.getText().toString());
 				mCardMap.put("exp_month", Integer.valueOf(mExpMonthTextField.getText().toString()));
@@ -176,7 +174,7 @@ public class TCMainActivity extends Activity {
 			@Override
 			public void afterTextChanged(Editable arg0) {
 				if(!arg0.toString().equals("")) {
-					mAmountTextView.setText(NumberFormat.getCurrencyInstance(Locale.US).format((Double.valueOf(arg0.toString()) * VALUE) / 100));
+					mAmountTextView.setText(NumberFormat.getCurrencyInstance(Locale.US).format((Double.valueOf(arg0.toString())) / 100));
 				} else {
 					mAmountTextView.setText("$0.00");
 				}
